@@ -64,6 +64,7 @@ export default function Upload() {
   const handleDelete = (key: string) => {
     const updatedRows = rows.filter((row) => row.key !== key);
     setRows(updatedRows);
+    localStorage.setItem("uploadedFiles", JSON.stringify(updatedRows)); // Update localStorage with the remaining files
   };
 
   // Function to trigger file download
