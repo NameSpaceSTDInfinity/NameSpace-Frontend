@@ -40,13 +40,19 @@ const Speedometer = () => {
 
       return () => {
         document.body.removeChild(script);
-        document.head.removeChild(link);
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
       };
     }
   }, [showChatbot]);
 
   const handleChatbotClick = () => {
     setShowChatbot(true);
+  };
+
+  const handleCloseChatbot = () => {
+    setShowChatbot(false);
   };
 
   return (
@@ -75,28 +81,47 @@ const Speedometer = () => {
       </Card>
       
       {showChatbot && (
-        <df-messenger
-          project-id="spry-blade-435912-d4"
-          agent-id="cd2c8aae-4757-40e1-8e89-5f8e6cecf888"
-          language-code="en"
-          max-query-length="-1"
-        >
-          <df-messenger-chat chat-title="helper_agent"></df-messenger-chat>
-        </df-messenger>
+        <div className="chatbot-container">
+          <Button 
+            color="danger" 
+            className="close-button" 
+            onClick={handleCloseChatbot}
+            size="sm"
+          >
+            X
+          </Button>
+          <df-messenger
+            project-id="spry-blade-435912-d4"
+            agent-id="cd2c8aae-4757-40e1-8e89-5f8e6cecf888"
+            language-code="en"
+            max-query-length="-1"
+          >
+            <df-messenger-chat chat-title="helper_agent"></df-messenger-chat>
+          </df-messenger>
+        </div>
       )}
-      <style>{`
-        df-messenger {
-          z-index: 999;
+      <style >{`
+        .chatbot-container {
           position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 350px;
+          height: 450px;
+          display: flex;
+          flex-direction: column;
+          z-index: 999;
+        }
+        .close-button {
+          align-self: flex-end;
+          margin-bottom: 10px;
+        }
+        df-messenger {
+          flex-grow: 1;
           --df-messenger-font-color: #000;
           --df-messenger-font-family: Google Sans, sans-serif;
           --df-messenger-chat-background: #f3f6fc;
           --df-messenger-message-user-background: #d3e3fd;
           --df-messenger-message-bot-background: #fff;
-          bottom: 20px;
-          right: 20px;
-          width: 350px;
-          height: 400px;
         }
       `}</style>
     </div>
