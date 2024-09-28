@@ -73,25 +73,26 @@ export default function Upload() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 max-w-screen-xl mt-10 mx-auto">
-      <p className="text-2xl font-bold text-slate-700 mb-4">Uploaded Documents</p>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">Document Management</h2>
 
-      {rows.length > 0 ? (
-        <div className="w-full max-w-4xl">
-          <Table aria-label="Uploaded documents">
+      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+        {rows.length > 0 ? (
+          <Table aria-label="Uploaded documents" className="min-w-full">
             <TableHeader columns={columns}>
               {(column) => (
-                <TableColumn className="font-bold text-lg" key={column.key}>
+                <TableColumn className="bg-gray-100 text-gray-700 font-semibold text-sm uppercase" key={column.key}>
                   {column.label}
                 </TableColumn>
               )}
             </TableHeader>
             <TableBody items={rows}>
               {(item) => (
-                <TableRow key={item.key}>
-                  <TableCell>{item.name}</TableCell>
+                <TableRow key={item.key} className="hover:bg-gray-50">
+                  <TableCell className="text-gray-700">{item.name}</TableCell>
                   <TableCell>
                     <Button
                       color="primary"
+                      size="sm"
                       onClick={() => handleDownload(item.name, item.content)}
                     >
                       Download
@@ -100,6 +101,8 @@ export default function Upload() {
                   <TableCell>
                     <Button
                       color="danger"
+                      size="sm"
+                      variant="light"
                       onClick={() => handleDelete(item.key)}
                     >
                       Delete
@@ -109,10 +112,12 @@ export default function Upload() {
               )}
             </TableBody>
           </Table>
-        </div>
-      ) : (
-        <p className="text-xl text-gray-500">There are no files to show</p>
-      )}
+        ) : (
+          <div className="p-8 text-center">
+            <p className="text-xl text-gray-500">No documents uploaded yet</p>
+          </div>
+        )}
+      </div>
 
       <input
         type="file"
@@ -122,11 +127,13 @@ export default function Upload() {
       />
 
       <Button
-        color="success"
-        className="mt-6 mb-6"
+        color="primary"
+        size="lg"
+        className="mt-8 mb-8"
+        endContent={<span className="ml-2">+</span>}
         onClick={() => document.getElementById("fileUpload")?.click()}
       >
-        Upload Documents
+        Upload New Document
       </Button>
     </div>
   );

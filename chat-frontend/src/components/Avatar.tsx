@@ -10,7 +10,7 @@ import {
 
 export default function Ava() {
   return (
-    <div className="flex gap-4 justify-center items-center space-x-8 flex-col md:flex-row mt-16">
+    <div className="flex justify-center items-center space-x-8 flex-col md:flex-row mt-16">
       <Avatar
         src="https://i.pravatar.cc/150?u=a04258114e29026708c"
         className="w-32 h-32 text-large"
