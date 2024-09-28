@@ -4,6 +4,8 @@ import { Card, CardBody, Button } from "@nextui-org/react";
 import { CustomSegmentLabelPosition } from 'react-d3-speedometer';
 import { saveAs } from 'file-saver';
 
+// ... existing imports ...
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -47,18 +49,13 @@ const Speedometer = () => {
     const chatContent = document.querySelector('df-messenger')?.shadowRoot?.querySelector('.message-list-wrapper')?.textContent;
     if (chatContent) {
       const blob = new Blob([chatContent], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'chat_history.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      saveAs(blob, 'chat_history.txt');
     }
   }, []);
 
   useEffect(() => {
+    // ... existing chatbot initialization code ...
+
     if (showChatbot) {
       const script = document.createElement('script');
       script.src = "https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js";
@@ -72,7 +69,7 @@ const Speedometer = () => {
           dfMessenger.setAttribute('max-query-length', '-1');
           document.body.appendChild(dfMessenger);
 
-          // Add this new code to inject CSS and create the download button
+          // Add CSS and create download button
           const style = document.createElement('style');
           style.textContent = `
             df-messenger {
@@ -112,7 +109,7 @@ const Speedometer = () => {
               if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 const addedNode = mutation.addedNodes[0];
                 if (addedNode.nodeType === Node.ELEMENT_NODE && (addedNode as Element).tagName === 'DF-MESSENGER-CHAT') {
-                  setTimeout(addDownloadButton, 1000); // Delay to ensure chat is fully rendered
+                  setTimeout(addDownloadButton, 1000);
                   observer.disconnect();
                 }
               }
@@ -147,68 +144,53 @@ const Speedometer = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 mb-20"> {/* Added mb-20 for bottom margin */}
-      <Card className="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
-        <CardBody className="p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Document Analysis</h2>
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <ReactSpeedometer
-                height={200}
-                width={300}
-                maxValue={100}
-                value={speedometerValue}
-                needleColor="#2563EB"
-                startColor="#EF4444"
-                endColor="#10B981"
-                segments={5}
-                customSegmentLabels={[
-                  { text: "Very Low", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
-                  { text: "Low", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
-                  { text: "Medium", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
-                  { text: "High", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
-                  { text: "Very High", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
-                ]}
-                ringWidth={25}
-                needleTransitionDuration={3000}
-                needleHeightRatio={0.7}
-                forceRender={true}
-              />
-            </div>
-            <div className="w-full md:w-1/2 flex flex-col space-y-4">
-              <Button
-                color="primary"
-                size="lg"
-                className="font-semibold"
-                onClick={handleUseChatbot}
-                startContent={<ChatIcon />}
-              >
-                Start Chatbot Analysis
-              </Button>
-              <Button
-                color="secondary"
-                size="lg"
-                className="font-semibold"
-                startContent={<SummarizeIcon />}
-              >
-                Generate Summary
-              </Button>
-            </div>
-          </div>
-        </CardBody>
-      </Card>
-
-      <style>{`
-        df-messenger {
-          --df-messenger-bot-message: #E5E7EB;
-          --df-messenger-button-titlebar-color: #2563EB;
-          --df-messenger-chat-background-color: #F3F4F6;
-          --df-messenger-font-color: #1F2937;
-          --df-messenger-send-icon: #6B7280;
-          --df-messenger-user-message: #BFDBFE;
-        }
-      `}</style>
-    </div>
+    <Card className="w-full h-full">
+      <CardBody className="flex flex-col justify-between p-8 h-full">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Document Analysis</h2>
+        <div className="flex flex-col items-center justify-center flex-grow">
+          <ReactSpeedometer
+            height={250}
+            width={300}
+            maxValue={100}
+            value={speedometerValue}
+            needleColor="#2563EB"
+            startColor="#EF4444"
+            endColor="#10B981"
+            segments={5}
+            customSegmentLabels={[
+              { text: "Very Low", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
+              { text: "Low", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
+              { text: "Medium", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
+              { text: "High", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
+              { text: "Very High", position: CustomSegmentLabelPosition.Inside, color: "#FFFFFF" },
+            ]}
+            ringWidth={25}
+            needleTransitionDuration={3000}
+            needleHeightRatio={0.7}
+            forceRender={true}
+          />
+        </div>
+        <div className="flex flex-col space-y-4 mt-6">
+          <Button
+            color="primary"
+            size="lg"
+            className="font-semibold"
+            onClick={handleUseChatbot}
+            startContent={<ChatIcon />}
+          >
+            Start Chatbot Analysis
+          </Button>
+          <Button
+            color="secondary"
+            size="lg"
+            className="font-semibold"
+            startContent={<SummarizeIcon />}
+          >
+            Generate Summary
+          </Button>
+        </div>
+      </CardBody>
+    </Card>
   );
 };
 

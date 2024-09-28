@@ -40,7 +40,7 @@ export default function Nav() {
               color="success" 
               className="text-white font-semibold"
             >
-              Sign Up
+              Login
             </Button>
           </Link>
         </NavbarItem>
