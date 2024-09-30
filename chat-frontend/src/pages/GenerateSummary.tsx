@@ -22,7 +22,7 @@ The policy outlines that GAIL will follow government guidelines for posts identi
 
 Post-recruitment, GAIL provides necessary training, including orientation and functional training, with periodic reviews to accommodate any additional needs of PwBD employees. Additionally, PwBD employees receive preference in transfer and posting, especially to their native places, and GAIL ensures that promotions are not denied due to disability.
 
-PwBD employees are also eligible for special casual leave, transport allowances, and assistive devices such as ramps, wheelchairs, accessible toilets, and elevators with audio-visual signals. GAIL’s digital platforms, including its website and intranet, will be made accessible, adhering to Web Content Accessibility Guidelines (WCAG) 2.1.
+PwBD employees are also eligible for special casual leave, transport allowances, and assistive devices such as ramps, wheelchairs, accessible toilets, and elevators with audio-visual signals. GAILs digital platforms, including its website and intranet, will be made accessible, adhering to Web Content Accessibility Guidelines (WCAG) 2.1.
 
 Liaison and Grievance Redressal Officers are designated to ensure compliance with the policy and resolve any grievances. The policy will be registered with the Chief Commissioner for Persons with Disabilities and updated as per directives from the Government of India.`;
 
