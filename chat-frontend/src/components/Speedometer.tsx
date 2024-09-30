@@ -3,6 +3,7 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { Card, CardBody, Button } from "@nextui-org/react";
 import { CustomSegmentLabelPosition } from 'react-d3-speedometer';
 import { saveAs } from 'file-saver';
+import { useNavigate } from 'react-router-dom';
 
 // ... existing imports ...
 
@@ -25,6 +26,7 @@ declare global {
 const Speedometer = () => {
   const [speedometerValue, setSpeedometerValue] = useState(100);
   const [showChatbot, setShowChatbot] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -143,6 +145,14 @@ const Speedometer = () => {
     setShowChatbot(true);
   };
 
+  const handleGenerateSummary = () => {
+    navigate('/generate-summary');
+  };
+
+  const handleImageAnalysis = () => {
+    navigate('/image-analysis');
+  };
+
   return (
     <Card className="w-full h-full">
       <CardBody className="flex flex-col justify-between p-8 h-full">
@@ -185,6 +195,7 @@ const Speedometer = () => {
             size="lg"
             className="font-semibold"
             startContent={<SummarizeIcon />}
+            onClick={handleGenerateSummary}
           >
             Generate Summary
           </Button>
@@ -193,6 +204,7 @@ const Speedometer = () => {
             size="lg"
             className="font-semibold"
             startContent={<ImageAnalysisIcon />}
+            onClick={handleImageAnalysis}
           >
             Analyze Images
           </Button>
