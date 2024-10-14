@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardBody, Avatar as NextUIAvatar } from "@nextui-org/react";
 
 const Avatar = () => {

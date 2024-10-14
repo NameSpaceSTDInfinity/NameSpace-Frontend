@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Avatar from '../components/Avatar';
 import Speedometer from '../components/Speedometer';
 import Upload from '../components/Upload';

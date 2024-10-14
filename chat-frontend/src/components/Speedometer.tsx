@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ReactSpeedometer from "react-d3-speedometer";
 import { Card, CardBody, Button } from "@nextui-org/react";
 import { CustomSegmentLabelPosition } from 'react-d3-speedometer';
