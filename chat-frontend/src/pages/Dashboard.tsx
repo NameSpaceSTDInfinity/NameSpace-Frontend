@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Avatar from '../components/Avatar';
 import Speedometer from '../components/Speedometer';
 import Upload from '../components/Upload';
 import { Button, Card, CardBody, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
-import jsPDF from 'jspdf';
 
 const Dashboard = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("English");
